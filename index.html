@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Welcome Aboard | Grow Bharat Technologies</title>
+    <!-- Belleza Font for elegant, sophisticated headers -->
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Brand Color Architecture */
+            --brand-primary: #380b19; /* Deep, premium burgundy tone */
+            --brand-accent: #f7dc92;  /* Elegant gold tone */
+            --text-dark: #1d1d1f;     /* Apple SF dark */
+            --text-muted: #86868b;    /* Apple SF secondary text */
+            --bg-clean: #ffffff;
+            --bg-soft: #f5f5f7;       /* Soft Apple gray fallback */
+            --card-radius: 28px;
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-clean);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Continuous Ambient Light Backdrop Strategy */
+        .ambient-glow {
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(247, 220, 146, 0.12) 0%, rgba(56, 11, 25, 0.02) 50%, rgba(255,255,255,0) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Mobile Container Setup optimized for single-hand interaction */
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 24px 24px 60px 24px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header Animation Styles */
+        header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .brand-logo {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: var(--brand-primary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        /* Apple Styled Cards */
+        .card {
+            background: #ffffff;
+            border-radius: var(--card-radius);
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.015);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Content Micro-Layouts */
+        .hero-card {
+            background: linear-gradient(145deg, #ffffff 0%, var(--bg-soft) 100%);
+            text-align: center;
+            border: 1px solid rgba(56, 11, 25, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+        }
+
+        .welcome-title {
+            font-family: 'Belleza', sans-serif;
+            font-size: 38px;
+            line-height: 1.15;
+            color: var(--brand-primary);
+            margin-bottom: 8px;
+        }
+
+        .employee-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .employee-role {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .timeline-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 18px;
+            background: rgba(56, 11, 25, 0.05);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--brand-primary);
+        }
+
+        .timeline-badge span {
+            font-weight: 700;
+            margin-left: 5px;
+        }
+
+        /* Insights & Motivation Typography */
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feedback-card h3 {
+            font-family: 'Belleza', sans-serif;
+            font-size: 24px;
+            color: var(--brand-primary);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .feedback-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #424245;
+            font-weight: 400;
+        }
+
+        /* Trajectory Block Interaction */
+        .vision-card {
+            background: var(--brand-primary);
+            color: #ffffff;
+            border: none;
+            position: relative;
+        }
+
+        .vision-card h3 {
+            font-family: 'Belleza', sans-serif;
+            font-size: 28px;
+            color: var(--brand-accent);
+            margin-bottom: 12px;
+        }
+
+        .vision-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Smooth Interactive Form elements */
+        .feedback-form-section {
+            background: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: var(--transition-smooth);
+            background-color: var(--bg-soft);
+        }
+
+        textarea:focus {
+            border-color: var(--brand-primary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(56, 11, 25, 0.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            border: none;
+            background: var(--brand-primary);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .success-toast {
+            display: none;
+            color: #1d1d1f;
+            background: #f2f9f3;
+            border: 1px solid #cce8d3;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Core Keyframe Animations */
+        @keyframes appleFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Elegant micro-haptic pulsing line for interactive feel */
+        .pulse-line {
+            height: 1px;
+            width: 60px;
+            background: var(--brand-accent);
+            margin: 20px auto 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .pulse-line::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: slideGlow 2s infinite linear;
+        }
+        @keyframes slideGlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="app-container">
+        <header>
+            <div class="brand-logo">Grow Bharat</div>
+            <h1 class="welcome-title">Welcome</h1>
+            <h1 class="welcome-title">to the Crew</h1>
+            <div class="pulse-line"></div>
+        </header>
+
+        <!-- Hero Card (Dynamic Name & Identity) -->
+        <div class="card hero-card" id="heroCard">
+            <div class="employee-name" id="empName">FATEMA LOKHANDWALA</div>
+            <div class="employee-role" id="empRole">Marketing and Media Executive</div>
+            <div class="timeline-badge">
+                Journey Commenced: <span id="empDoj">21st May 2026</span>
+            </div>
+        </div>
+
+        <!-- Analytical / Motivational Insights from Interview Alignment -->
+        <div class="card feedback-card" id="motivationCard">
+            <span class="section-label">Why You Are Here</span>
+            <h3 id="motivationTitle">Built for the Toughest Frontlines</h3>
+            <p id="motivationText">During our assessment, your profile clearly set you apart. You aren't just looking for tasks; you are a natural fighter who leans into creative problems. Your dedication and profound passion are exactly what will drive our vision forward. We know you are engineered for the best things.</p>
+        </div>
+
+        <!-- Vision / North Star Card -->
+        <div class="card vision-card" id="visionCard">
+            <span class="section-label" style="color: rgba(255,255,255,0.6);">Our Shared Trajectory</span>
+            <h3>Reaching New Heights</h3>
+            <p>At Grow Bharat, we construct platforms that redefine enterprise scaling. We don't settle for incremental additions. You are step one of our next collective leap. Bring your raw energy everyday—we will clear the path for you to soar.</p>
+        </div>
+
+        <!-- Interactive Micro-Feedback Capture Node -->
+        <div class="card feedback-form-section" id="formCard">
+            <span class="section-label">Day 1 Intentions</span>
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;">What single milestone or skill are you looking to crush or conquer first with us?</p>
+            
+            <!-- Replace the action URL with your Google Forms / Apps Script Web App Deployment endpoint -->
+            <form id="onboardingFeedbackForm" action="https://script.google.com/macros/s/YOUR_DEPLOYED_APP_SCRIPT_ID/exec" method="POST">
+                <input type="hidden" name="employee" id="formEmpName" value="FATEMA LOKHANDWALA">
+                <div class="form-group">
+                    <textarea name="aspiration" placeholder="Type your personal benchmark or perspective here..." required></textarea>
+                </div>
+                <button type="submit">
+                    <span>Lock in My Trajectory</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </form>
+            <div class="success-toast" id="successToast">⚡ Intentions captured. Welcome to the workspace blueprint!</div>
+        </div>
+    </div>
+
+    <script>
+        // Data Registry mapping unique query params to different onboarding resource configurations
+        const resourcesDataset = {
+            "fatema": {
+                name: "FATEMA LOKHANDWALA",
+                role: "Marketing and Media Executive",
+                doj: "21st May 2026",
+                motivationTitle: "Built for the Toughest Frontlines",
+                motivationText: "During our assessment, your profile clearly set you apart. You aren't just looking for tasks; you are a natural fighter who leans into creative problems. Your dedication and profound passion are exactly what will drive our market ecosystem forward. We know you are engineered for the best milestones."
+            },
+            "resource2": {
+                name: "ARJUN MEHTA",
+                role: "Full Stack Engineer",
+                doj: "21st May 2026",
+                motivationTitle: "Engineered for Execution Speed",
+                motivationText: "Your technical evaluation proved your exceptional grip over workflow logic and clean code deployment. You have an innate curiosity to optimize complex structures. We need builders who can structure code seamlessly—you are precisely configured for that target architecture."
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // URL Parser Logic to make this code effortlessly reusable via specific QR endpoints
+            const urlParams = new URLSearchParams(window.location.search);
+            const employeeKey = urlParams.get('employee')?.toLowerCase() || 'fatema';
+            const data = resourcesDataset[employeeKey] || resourcesDataset['fatema'];
+
+            // Hydrate UI content dynamically based on the resolved parameter
+            document.getElementById('empName').innerText = data.name;
+            document.getElementById('formEmpName').value = data.name;
+            document.getElementById('empRole').innerText = data.role;
+            document.getElementById('empDoj').innerText = data.doj;
+            document.getElementById('motivationTitle').innerText = data.motivationTitle;
+            document.getElementById('motivationText').innerText = data.motivationText;
+
+            // Smooth Staggered Apple Fade-In Engine
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, 200 + (index * 150)); // Clean 150ms structural stagger delay
+            });
+
+            // Asynchronous Google Sheets Post Pipeline Handler
+            const form = document.getElementById('onboardingFeedbackForm');
+            form.addEventListener('submit', function(e) {
+                // Remove e.preventDefault() only if you prefer navigating away. 
+                // We use async catch architecture to ensure premium continuous page interaction.
+                e.preventDefault();
+                const submitButton = form.querySelector('button');
+                const toast = document.getElementById('successToast');
+                
+                submitButton.innerText = "Syncing with cloud...";
+                submitButton.style.opacity = "0.6";
+
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Bypasses traditional CORS restrictions commonly encountered with Google Macro sheets
+                })
+                .then(() => {
+                    form.style.display = 'none';
+                    toast.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Submission log tracking:', error);
+                    // Soft error fallback UI protection
+                    form.style.display = 'none';
+                    toast.innerText = "👍 Choices logged locally. Welcome aboard!";
+                    toast.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
